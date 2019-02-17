@@ -198,6 +198,30 @@ func checkDebug(req *cmds.Request) {
 	}
 }
 
+func initializeMailbox(req *cmds.Request) string {
+	// Add current mailbox onto ipfs node
+	path := req.Path
+	ret := "NULL"
+	if (path[0] == "vmail1") {
+		ret = "default"
+	} else {
+		ret = path[0]
+	}
+	return ret
+}
+
+func defaultMailIface(path string) {
+	// Method stub for processing default mail path
+	defaultVmail1Config()
+
+	// Method stub for processing abnormal mail path
+	customVmail1Config(path)
+}
+
+func defaultVmail1Config(){}
+
+func customVmail1Config(path string){}
+
 func makeExecutor(req *cmds.Request, env interface{}) (cmds.Executor, error) {
 	details := commandDetails(req.Path)
 	client, err := commandShouldRunOnDaemon(*details, req, env.(*oldcmds.Context))
